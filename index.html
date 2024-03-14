@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personal Portfolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+<div class="hero">
+    <nav>
+        <img src="" alt="">
+        <ul>
+            <li><a href="#">HOME</a></li>
+            <li><a href="#">ABOUT</a></li>
+            <li><a href="#">SERVICES</a></li>
+            <li><a href="#">CONTACT</a></li>
+        </ul>
+    </nav>
+    <div class="detel">
+        <h1>Dr.Shagufta Kamal <span>SK</span></h1>
+        <p>BACK 2 NORMAL LIFE</p>
+    </div>
+
+    <div class="images">
+        <img src="image.jpg" class="girl">
+    </div>
+
+    <form name="submit-to-google-sheet">
+        <div>
+            <label for="clientName">Name:</label>
+            <input type="text" id="clientName" name="clientName">
+        </div>
+        <div>
+            <label for="contact">Contact:</label>
+            <input type="text" id="contact" name="contact">
+        </div>
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+        </div>
+        <div class="rating">
+            <input type="radio" name="star" id="star5" class="rating-radius" value="5"><label for="star5"><i class="fa-solid fa-heart-pulse"></i></label>
+            <input type="radio" name="star" id="star4" class="rating-radius" value="4"><label for="star4"><i class="fa-solid fa-heart-pulse"></i></label>
+            <input type="radio" name="star" id="star3" class="rating-radius" value="3"><label for="star3"><i class="fa-solid fa-heart-pulse"></i></label>
+            <input type="radio" name="star" id="star2" class="rating-radius" value="2"><label for="star2"><i class="fa-solid fa-heart-pulse"></i></label>
+            <input type="radio" name="star" id="star1" class="rating-radius" value="1"><label for="star1"><i class="fa-solid fa-heart-pulse"></i></label>
+        </div>
+        <div>
+            <label for="feedback">Feedback:</label>
+            <textarea id="feedback" name="feedback" rows="4" cols="50"></textarea>
+        </div>
+        <button type="button" onclick="submitFeedback()">Submit</button>
+    </form>
+    <div id="reviews">
+        <h2>Customer reviews</h2>
+        <ul id="reviews-list"></ul>
+    </div>
+</div>
+
+<script>
+    function displayReviews() {
+        fetch('https://script.google.com/macros/s/AKfycbzfn-ZWrARm60QS7ywKhJTIBMNnx-kcPGrfvwO5NBbgm1CfA6YUpzl5kIFOqdivJOT-/exec')
+        .then(response => response.json())
+        .then(data => {
+            const reviewsList = document.getElementById('reviews-list');
+            reviewsList.innerHTML = '';
+
+            data.forEach(review => {
+                const listItem = document.createElement('li');
+                listItem.innerHTML = `<strong>${review.clientName}</strong>: ${review.feedback}, Stars: ${review.star}`;
+                reviewsList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error:', error));
+    }
+
+    function submitFeedback() {
+        const form = document.forms['submit-to-google-sheet'];
+        const formData = new FormData(form);
+        const selectedStar = document.querySelector('input[name="star"]:checked').value;
+        formData.append('star', selectedStar);
+
+        fetch('https://script.google.com/macros/s/AKfycbyNSj7DAO2D5lNaPob0ktcfgc5vA6ZeFE4kCpnRb4A-CTWI6faVA4fPBnJvYxV74-7A/exec', {
+            method: 'POST',
+            body: formData,
+        })
+        .then(response => {
+            if (response.ok) {
+                alert('Feedback submitted successfully!');
+                form.reset();
+                displayReviews(); // Refresh reviews after submitting feedback
+            } else {
+                alert('Error submitting feedback!');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    }
+
+    // Call displayReviews function to fetch and display reviews when the page loads
+    displayReviews();
+</script>
+</body>
+</html>

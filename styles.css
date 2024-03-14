@@ -1,0 +1,186 @@
+/* Reset styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+/* Global styles */
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background: #ffffff;
+}
+
+/* Navigation styles */
+nav {
+    display: flex;
+    width: 84%;
+    margin: auto;
+    padding: 20px 0;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul li {
+    display: inline-block;
+    margin: 10px 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #000;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: red;
+}
+
+/* Details section styles */
+.detel {
+    margin-left: 8%;
+    margin-top: 15%;
+}
+
+.detel h1 {
+    font-size: 50px;
+    color: #212121;
+    margin-bottom: 20px;
+    margin-left: -8%;
+}
+
+.detel p {
+    color: #555;
+    line-height: 22px;
+    font-size: 20px;
+}
+
+.detel a {
+    background: #212121;
+    padding: 10px 18px;
+    text-decoration: none;
+    font-weight: bold;
+    color: #fff;
+    display: inline-block;
+    margin: 30px 0;
+    border-radius: 5px;
+}
+
+/* Image styles */
+.images {
+    width: 45%;
+    height: 80%;
+    position: absolute;
+    bottom: 0;
+    right: 100px;
+}
+
+.images:hover .shape {
+    bottom: 40px;
+}
+
+.images:hover .girl {
+    left: 45;
+}
+
+/* Star rating styles */
+.rating {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.rating input {}
+
+.rating label {
+    display: inline-block;
+    cursor: pointer;
+    width: 50px;
+    background: #fffdfd;
+}
+
+.rating label i {
+    font-size: 3rem;
+    transition: 0.1s ease-in;
+}
+
+.rating label:hover i,
+.rating label:hover~label i {
+    color: #dc143c;
+}
+
+.rating .rating-radius {
+    display: none;
+}
+
+.rating input[type="radio"]:checked+label i,
+.rating input[type="radio"]:checked~label i {
+    color: #dc143c;
+}
+
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+form div {
+    margin-bottom: 10px;
+}
+
+form label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="email"],
+form textarea {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+form button {
+    padding: 10px 20px;
+    background-color: #212121;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #333;
+}
+#reviews-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.review-item {
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.client-name {
+    font-weight: bold;
+}
+
+.feedback {
+    margin-bottom: 5px;
+}
+
+.stars {
+    font-style: italic;
+}
